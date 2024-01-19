@@ -1,9 +1,10 @@
 ﻿#include <fstream>
 
-#include "APRK_Parser.h"
+#include "APRK_Parser.cpp"
 
 int main() {
-	std::ifstream file("Test2.APRk");
+	std::ifstream file;
+	file.open("Test2.APRk");
 	if (file) {
 		Parser pars(file);
 	}
