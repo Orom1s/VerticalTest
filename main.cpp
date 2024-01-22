@@ -1,6 +1,6 @@
 ﻿#include <fstream>
 
-#include "APRK_Parser.cpp"
+#include "TechProces.h"
 
 int main() {
 	std::ifstream file;

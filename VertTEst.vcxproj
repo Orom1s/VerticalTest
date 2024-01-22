@@ -135,6 +135,8 @@
       <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdc17</LanguageStandard_C>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TechProces.cpp" />
+    <ClCompile Include="TechProces.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Test2.APRk" />
