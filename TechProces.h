@@ -6,14 +6,20 @@ public:
 	TechProc() = default;
 
 	TechProc(Parser& data);
+
 private:
 	std::vector<Drawing> drawings;
 	std::vector<Operation> operations;
+
+	void SetDraws(Parser& data);
+	void SetOpers(Parser& data);
 };
 
 class Operation {
 public:
+	Operation() = default;
 
+	Operation(Parser& data);
 private:
 	std::string nameoper;
 	std::string indexoper;
@@ -23,6 +29,9 @@ private:
 
 class Drawing {
 public:
+	Drawing() = default;
+
+	Drawing(std::string name, const std::string& file, const std::string& path);
 
 private:
 	std::string caption;
