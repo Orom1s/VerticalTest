@@ -7,6 +7,7 @@ int main() {
 	file.open("Test2.APRk");
 	if (file) {
 		Parser pars(file);
+		TechProc TP(pars);
 	}
 	file.close();
 }

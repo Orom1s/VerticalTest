@@ -1,67 +1,80 @@
 #include "APRK_Parser.cpp"
 
+#include <optional>
 
-class TechProc  {
-public:
-	TechProc() = default;
+	class Operation;
+	class Drawing;
+	class Step;
+	class Parameter;
+	
 
-	TechProc(Parser& data);
 
-private:
-	std::vector<Drawing> drawings;
-	std::vector<Operation> operations;
+	class TechProc {
+	public:
+		TechProc() = default;
 
-	void SetDraws(Parser& data);
-	void SetOpers(Parser& data);
-};
+		TechProc(Parser& data);
 
-class Operation {
-public:
-	Operation() = default;
+	private:
+		std::vector<Drawing> drawings;
+		std::vector<Operation> operations;
 
-	Operation(Parser& data);
-private:
-	std::string nameoper;
-	std::string indexoper;
-	Scetch scetch;
-	std::vector<Step> steps;
-};
+		void SetDraws(Parser& data);
+		void SetOpers(Parser& data);
+	};
 
-class Drawing {
-public:
-	Drawing() = default;
+	class Drawing {
+	public:
+		Drawing() = default;
 
-	Drawing(std::string name, const std::string& file, const std::string& path);
+		Drawing(std::string name, const std::string& file, const std::string& path);
 
-private:
-	std::string caption;
-	std::string kompasfile;
-};
+	private:
+		std::string caption;
+		std::string kompasfile;
+	};
 
-class Scetch {
-public:
+	class Operation {
+	public:
+		Operation() = default;
 
-private:
-	std::string caption;
-	std::string kompasfile;
-};
+		Operation(std::vector<std::vector<std::string>> operdata, std::string etp, const std::string& path);
+	private:
+		std::string nameoper;
+		std::string indexoper;
+		Drawing scetch_;
+		std::vector<Step> steps;
+	};
 
-class Step {
-public:
+	class Step {
+	public:
+		Step() = default;
 
-private:
-	std::string name;
-	std::string numstep;
-	std::vector<Parameter> parameters;
-};
+		Step(std::vector<std::vector<std::string>> operdata, std::string etp);
+	private:
+		std::string name;
+		std::string numstep;
+		std::vector<Parameter> parameters;
+	};
 
-class Parameter {
-public:
+	class Parameter {
+	public:
+		Parameter() = default;
 
-private:
-	std::string param;
-	std::string value_dimVAL;
-	double value_upDEV;
-	double value_lowDEV;
-	std::string value_QUAL;
-};
+		Parameter(std::vector<std::string> operdata);
+
+	private:
+		bool show = true;
+		bool showname = true; 
+		std::string param;
+		
+		struct Size {
+			std::string value_dimVAL;
+			double value_upDEV;
+			double value_lowDEV;
+			std::string value_QUAL;
+		};
+
+		Size size_;
+	};
+

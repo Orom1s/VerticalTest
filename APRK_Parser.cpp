@@ -21,16 +21,15 @@ public:
             if (line == "[dimsPARAM]") {
                 std::getline(aprk, line);
                 pos = line.find_last_of(' ');
-                detail_ = line.substr(pos);
+                detail_ = line.substr(pos+1);
             }
             if (line == "[dimsPARAM.T]") {
                 std::getline(aprk, line);
                 while (line != "") {
                     pos = line.find('=');
-                    key = line.substr(0, pos);
                     value = line.substr(pos + 1);
                     std::vector<std::string> params = SplitIntoWords(value);
-                    dims_param_t_.emplace(std::stoi(key), params);
+                    dims_param_t_.push_back(params);
                     std::getline(aprk, line);
                 }
             }
@@ -57,7 +56,7 @@ public:
         return etp_;
     }
 
-    const std::map<int, std::vector<std::string>>& GetDims() const {
+    const std::vector<std::vector<std::string>>& GetDims() const {
         return dims_param_t_;
     }
 
@@ -71,7 +70,7 @@ public:
 
 private:
     std::map<int, std::string> etp_;
-    std::map<int, std::vector<std::string>> dims_param_t_;
+    std::vector<std::vector<std::string>> dims_param_t_;
     std::string detail_;
     std::string path_;
 
