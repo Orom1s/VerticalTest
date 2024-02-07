@@ -38,30 +38,35 @@
 	public:
 		Operation() = default;
 
-		Operation(std::vector<std::vector<std::string>> operdata, std::string etp, const std::string& path);
+		Operation(const std::vector<std::vector<std::string>>& operdata, const std::string& etp, const std::string& path);
 	private:
 		std::string nameoper;
 		std::string indexoper;
 		Drawing scetch_;
 		std::vector<Step> steps;
+
+		void SetType(const std::string& etp);
+		void AssignSteps(const std::vector<std::vector<std::string>>& operdata, const std::string& etp);
 	};
 
 	class Step {
 	public:
 		Step() = default;
 
-		Step(std::vector<std::vector<std::string>> operdata, std::string etp);
+		Step(const std::vector<std::vector<std::string>>& operdata, const std::string& etp);
 	private:
 		std::string name;
 		std::string numstep;
 		std::vector<Parameter> parameters;
+
+		void SetType(const std::string& etp);
 	};
 
 	class Parameter {
 	public:
 		Parameter() = default;
 
-		Parameter(std::vector<std::string> operdata);
+		Parameter(const std::vector<std::string>& operdata);
 
 	private:
 		bool show = true;

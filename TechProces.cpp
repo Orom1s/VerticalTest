@@ -40,7 +40,17 @@ Drawing::Drawing(std::string name, const std::string& file, const std::string& p
 	kompasfile = path + file;
 }
 
-Operation::Operation(std::vector<std::vector<std::string>> operdata, std::string etp, const std::string& path) {
+Operation::Operation(const std::vector<std::vector<std::string>>& operdata, const std::string& etp, const std::string& path) {
+	SetType(etp);
+	indexoper = operdata[0][0];
+	std::string file = *(operdata[0].end() - 1);
+	if (file != "0") {
+		scetch_ = Drawing("Ёскиз", file, path);
+	}
+	AssignSteps(operdata, etp);
+}
+
+void Operation::SetType(const std::string& etp) {
 	if (etp.find("MO"s) != std::string::npos) {
 		nameoper = "mex_oper";
 	}
@@ -50,11 +60,9 @@ Operation::Operation(std::vector<std::vector<std::string>> operdata, std::string
 	else {
 		nameoper = "pok_oper";
 	}
-	indexoper = operdata[0][0];
-	std::string file = *(operdata[0].end() - 1);
-	if (file != "0") {
-		scetch_ = Drawing("Ёскиз", file, path);
-	}
+}
+
+void Operation::AssignSteps(const std::vector<std::vector<std::string>>& operdata, const std::string& etp) {
 	int count_steps = 0;
 	std::vector<int> num_steps;
 	for (auto& oper : operdata) {
@@ -79,23 +87,27 @@ Operation::Operation(std::vector<std::vector<std::string>> operdata, std::string
 	}
 }
 
-Step::Step(std::vector<std::vector<std::string>> operdata, std::string etp) {
-	if (etp.find("MO") != std::string::npos) {
-		name = "mex_step";
-	}
-	else if (etp.find("TO") == std::string::npos) {
-		name = "trm_step";
-	}
-	else {
-		name = "pok_step";
-	}
+Step::Step(const std::vector<std::vector<std::string>>& operdata, const std::string& etp) {
+	SetType(etp);
 	numstep = operdata[0][1];
 	for (auto data : operdata) {
 		parameters.push_back(Parameter(data));
 	}
 }
 
-Parameter::Parameter(std::vector<std::string> operdata) {
+void Step::SetType(const std::string& etp) {
+	if (etp.find("MO") != std::string::npos) {
+		name = "mex_step";
+	}
+	else if (etp.find("TO") != std::string::npos) {
+		name = "trm_step";
+	}
+	else {
+		name = "pok_step";
+	}
+}
+
+Parameter::Parameter(const std::vector<std::string>& operdata) {
 	param = *(operdata.end() - 2);
 	size_.value_dimVAL = *(operdata.begin() + 7);
 	if (*(operdata.begin() + 10) == "0") {

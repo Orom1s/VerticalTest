@@ -4,7 +4,7 @@
 
 int main() {
 	std::ifstream file;
-	file.open("Test2.APRk");
+	file.open("Корпус.APRk");
 	if (file) {
 		Parser pars(file);
 		TechProc TP(pars);
