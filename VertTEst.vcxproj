@@ -134,12 +134,22 @@
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp17</LanguageStandard>
       <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdc17</LanguageStandard_C>
     </ClCompile>
+    <ClCompile Include="Drawing.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="Step.cpp" />
     <ClCompile Include="TechProces.cpp" />
     <ClCompile Include="TechProces.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Test2.APRk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Operation.h" />
+    <ClInclude Include="Parameter.h" />
+    <ClInclude Include="Step.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
