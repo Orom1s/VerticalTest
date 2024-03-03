@@ -23,6 +23,7 @@ void TechProc::SetOpers(Parser& data) {
 	const auto& dims_al = data.GetDimsAlias();
 	auto pos = FindPosWord(dims_al, "operID");
 	std::vector<std::vector<std::string>> operdata;
+	//заполнение операций по количеству одинаковых operID и игнорирование operID = 0
 	for (auto& [key, val] : etp) {
 		if (key == 0) continue;
 		for (auto& oper : dims) {

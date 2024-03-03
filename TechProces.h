@@ -15,6 +15,8 @@
 		std::vector<Drawing> drawings;
 		std::vector<Operation> operations;
 
+		//метод для заполнения эскизов
 		void SetDraws(Parser& data);
+		//метод для заполнения операций
 		void SetOpers(Parser& data);
 	};

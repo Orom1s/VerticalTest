@@ -18,6 +18,7 @@ public:
         std::string value;
         size_t pos;
         while (std::getline(aprk, line)) {
+            //метод для получения позиции CADfile, чтобы в будущем найти в dimsPARAM сам файл
             if (line == "[DIMS]") {
                 std::vector<std::string> dims;
                 std::getline(aprk, line);
@@ -34,6 +35,8 @@ public:
                 auto pos_file = std::find(dims.begin(), dims.end(), "CADfile");
                 dims_cad = std::distance(dims.begin(), pos_file);
             }
+            //метод для получения позиции CADfile, чтобы в будущем найти в dimsPARAM.T сам файл
+            //Так же сохраняется сама разделенная строка, для поиска позиций необходимых данных в dimsPARAM.T
             if (line == "[DIMS.T]") {
                 std::getline(aprk, line);
                 while (line != "") {
@@ -49,6 +52,7 @@ public:
                 auto pos_file = std::find(dims_t.begin(), dims_t.end(), "CADfile");
                 dims_t_cad = std::distance(dims_t.begin(), pos_file);
             }
+            //метод для получения файла Эскиза
             if (line == "[dimsPARAM]") {
                 std::getline(aprk, line);
                 pos = line.find('=');
@@ -56,6 +60,7 @@ public:
                 auto dims_param = SplitIntoWords(value);
                 detail_ = dims_param[dims_cad];
             }
+            //метод для получения всех строк из dimsPARAM.T, для последующего заполнения классов
             if (line == "[dimsPARAM.T]") {
                 std::getline(aprk, line);
                 while (line != "") {
@@ -66,6 +71,7 @@ public:
                     std::getline(aprk, line);
                 }
             }
+            //метод для полученя разделенных строк из ETOPERATIONSLAYOUT и ETPALIAS, и перемещение их в словарях для более простого доступа в будущем
             if (line == "[GRAPHIT-TM]") {
                 std::vector<std::string> etp_op;
                 std::vector<std::string> etp_al;
@@ -89,6 +95,7 @@ public:
                     return std::make_pair(std::stoi(key), value);
                     });
             }
+            //метод для получения пути где находятся файлы
             if (line == "[OPTIONS]") {
                 do {
                     std::getline(aprk, line);
@@ -103,6 +110,7 @@ public:
         }
 	}
 
+    //методы для получения необходимых данных
     const std::map<int, std::string>& GetEtp() const {
         return etp_;
     }
@@ -135,6 +143,7 @@ private:
     std::string detail_;
     std::string path_;
 
+    //Нет стандартного метода для разбиения строки на слова, поэтому адаптировал ранее написанный метод
     std::vector<std::string> SplitIntoWords(const std::string& text) {
         std::vector<std::string> words;
         std::string word;

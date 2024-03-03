@@ -8,6 +8,7 @@ class Parameter {
 public:
 	Parameter() = default;
 
+	//заполнение данных класса в конструкторе
 	Parameter(const std::vector<std::string>& operdata, const std::vector<std::string>& dims_al);
 
 private:
@@ -25,4 +26,5 @@ private:
 	Size size_;
 };
 
+//метод для получения позиции слова в разделенной строке, вывел в отдельный метод, так как часто используется
 size_t FindPosWord(const std::vector<std::string>& dims_al, const std::string& word);

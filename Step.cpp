@@ -4,6 +4,7 @@ Step::Step(const std::vector<std::vector<std::string>>& operdata, const std::str
 	SetType(etp);
 	auto pos = FindPosWord(dims_al, "suboperSEQ");
 	numstep = operdata[0][pos];
+	//заполнение параметров по кличеству строк переданных в шаг
 	for (auto data : operdata) {
 		parameters.push_back(Parameter(data, dims_al));
 	}

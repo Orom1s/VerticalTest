@@ -37,6 +37,7 @@ void Operation::AssignSteps(const std::vector<std::vector<std::string>>& operdat
 			num_steps.push_back(count_steps);
 		}
 	}
+	//счетчик count_steps нужен для правильного определения количества шагов в операции 1 или больше
 	if (count_steps) {
 		for (int i = 0; i <= count_steps; ++i) {
 			auto first = operdata.begin() + num_steps[i];
